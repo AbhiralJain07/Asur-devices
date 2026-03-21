@@ -2,14 +2,14 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 // Simple 3D Globe Component (Original Design)
 function SimpleGlobe({ isMouseMoving }: { isMouseMoving: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     // Dynamic rotation speed based on mouse movement
     const baseSpeed = 0.02;
     const mouseSpeed = isMouseMoving ? 0.05 : baseSpeed;
@@ -38,7 +38,7 @@ function DataPoints() {
   const pointsGroupRef = useRef<THREE.Group>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     // Dynamic rotation speed based on mouse movement
     const baseSpeed = 0.008;
     const mouseSpeed = hoveredNode ? 0.02 : baseSpeed;
@@ -94,7 +94,7 @@ function DataPoints() {
 function UrbanGrid() {
   const gridRef = useRef<THREE.Group>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (gridRef.current) {
       gridRef.current.rotation.y += delta * 0.005;
     }
@@ -110,12 +110,13 @@ function UrbanGrid() {
             <bufferGeometry>
               <bufferAttribute
                 attach="attributes-position"
-                count={2}
-                array={new Float32Array([
-                  Math.cos(angle) * 1.9, -1.9, Math.sin(angle) * 1.9,
-                  Math.cos(angle) * 1.9, 1.9, Math.sin(angle) * 1.9
-                ])}
-                itemSize={3}
+                args={[
+                  new Float32Array([
+                    Math.cos(angle) * 1.9, -1.9, Math.sin(angle) * 1.9,
+                    Math.cos(angle) * 1.9, 1.9, Math.sin(angle) * 1.9
+                  ]),
+                  3
+                ]}
               />
             </bufferGeometry>
             <lineBasicMaterial 
@@ -135,12 +136,13 @@ function UrbanGrid() {
             <bufferGeometry>
               <bufferAttribute
                 attach="attributes-position"
-                count={2}
-                array={new Float32Array([
-                  -1.9, Math.cos(angle) * 1.9, Math.sin(angle) * 1.9,
-                  1.9, Math.cos(angle) * 1.9, Math.sin(angle) * 1.9
-                ])}
-                itemSize={3}
+                args={[
+                  new Float32Array([
+                    -1.9, Math.cos(angle) * 1.9, Math.sin(angle) * 1.9,
+                    1.9, Math.cos(angle) * 1.9, Math.sin(angle) * 1.9
+                  ]),
+                  3
+                ]}
               />
             </bufferGeometry>
             <lineBasicMaterial 
@@ -209,7 +211,6 @@ interface SimpleVisualizationProps {
 
 export default function SimpleVisualization({ className }: SimpleVisualizationProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [isMouseMoving, setIsMouseMoving] = useState(false);
 
   useEffect(() => {
@@ -235,18 +236,6 @@ export default function SimpleVisualization({ className }: SimpleVisualizationPr
       clearTimeout(timeout);
     };
   }, []);
-
-  if (error) {
-    return (
-      <div className={`relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden glass border border-white/10 flex items-center justify-center ${className || ''}`}>
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-red-500/30 border-t-red-500 rounded-full animate-spin mx-auto"></div>
-          <div className="text-red-500">Failed to load 3D visualization</div>
-          <div className="text-sm text-gray-400">Please try refreshing the page</div>
-        </div>
-      </div>
-    );
-  }
 
   if (isLoading) {
     return (

@@ -186,7 +186,7 @@ export function useScrollReveal(threshold: number = 0.1) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(entry.target);
         }
@@ -261,7 +261,6 @@ export function useParallax(speed: number = 0.5) {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
       const elementTop = elementRef.current?.offsetTop || 0;
-      const elementHeight = elementRef.current?.offsetHeight || 0;
       
       // Calculate parallax offset
       const parallaxOffset = (scrollTop - elementTop) * speed;

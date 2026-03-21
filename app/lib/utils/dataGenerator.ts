@@ -1,4 +1,4 @@
-import { SmartCityData, TrafficMetrics, PollutionMetrics, WasteMetrics, EnergyMetrics, TrafficIncident } from "../../types";
+import { SmartCityData, TrafficMetrics, PollutionMetrics, WasteMetrics, EnergyMetrics } from "../../types";
 
 export class SmartCityDataGenerator {
   private updateInterval: NodeJS.Timeout | null = null;

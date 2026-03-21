@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useEffect } from "react";
+import { useCallback, useRef } from "react";
 
 interface AnimationPerformanceConfig {
   targetFPS: number;

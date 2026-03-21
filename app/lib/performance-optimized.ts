@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 
 // Performance monitoring utilities
 export const useFPSCounter = () => {
   const [fps, setFps] = useState(60);
   const frameCount = useRef(0);
   const lastTime = useRef(performance.now());
-  const animationId = useRef<number>();
+  const animationId = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const measureFPS = () => {
@@ -86,7 +86,7 @@ export const useOptimizedAnimation = (
 // Debounced animation
 export const useDebouncedAnimation = (delay: number = 100) => {
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const triggerAnimation = useCallback(() => {
     if (timeoutRef.current) {
@@ -134,7 +134,7 @@ export const useLazyAnimation = (
   rootMargin: string = "50px"
 ) => {
   const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
+  const elementRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -329,9 +329,9 @@ export const performanceUtils = {
   raf: (callback: FrameRequestCallback) => {
     let animationId: number;
     
-    const animate = () => {
+    const animate = (timestamp: number) => {
       animationId = requestAnimationFrame(animate);
-      callback();
+      callback(timestamp);
     };
     
     animationId = requestAnimationFrame(animate);

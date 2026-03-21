@@ -35,30 +35,21 @@ export const ContainerScroll = ({
   const rotate = useTransform(
     scrollYProgress, 
     [0, 0.2, 0.8, 1], 
-    [15, 8, 2, 0],
-    {
-      ease: [0.25, 0.1, 0.25, 1] // Custom cubic-bezier for smoothness
-    }
+    [15, 8, 2, 0]
   );
   
   // Enhanced smooth scaling with easing
   const scale = useTransform(
     scrollYProgress, 
     [0, 0.3, 0.7, 1], 
-    scaleDimensions(),
-    {
-      ease: [0.25, 0.1, 0.25, 1] // Custom cubic-bezier for smoothness
-    }
+    scaleDimensions()
   );
   
   // Enhanced smooth translation with easing
   const translate = useTransform(
     scrollYProgress, 
     [0, 0.4, 0.6, 1], 
-    [0, -30, -70, -120],
-    {
-      ease: [0.25, 0.1, 0.25, 1] // Custom cubic-bezier for smoothness
-    }
+    [0, -30, -70, -120]
   );
 
   return (

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import HeroSection from "./components/sections/HeroSection";
 import { Navigation } from "./components/ui/Navigation";
-import Button from "./components/ui/Button";
+import HeroSection from "./components/sections/HeroSection";
 import { ContainerScroll } from "./components/ui/container-scroll-animation";
-import { StaggerTestimonials } from "./components/ui/stagger-testimonials";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { Pricing } from "@/components/ui/single-pricing-card-1";
+import Testimonials from "@/components/ui/testimonials-demo";
+import Button from "./components/ui/Button";
 
 // Toast notification component
 function Toast({ message, isVisible }: { message: string; isVisible: boolean }) {
@@ -159,16 +161,16 @@ function FeaturesSection() {
 
   return (
     <section id="features" className="scroll-mt-20 pt-24 pb-16 bg-background-primary">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: "true", amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-4"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Powerful Features</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Powerful Features</h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Comprehensive smart city management tools designed for modern urban challenges
           </p>
         </motion.div>
@@ -177,33 +179,31 @@ function FeaturesSection() {
         <ContainerScroll
           titleComponent={
             <>
-              <h2 className="text-4xl font-semibold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-4">
                 Experience Our <br />
-                <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                  Smart Features
-                </span>
+                <span className="text-neon-blue">Smart City Platform</span>
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mt-4">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mt-4 px-4">
                 Scroll to see our powerful features in action
               </p>
             </>
           }
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass rounded-2xl border border-white/10 p-8 hover:border-neon-blue/30 transition-all duration-300 group"
+                className="glass rounded-2xl border border-white/10 p-4 sm:p-6 lg:p-8 hover:border-neon-blue/30 transition-all duration-300 group"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className={`text-4xl mb-4 ${feature.color === "neon-blue" ? "text-neon-blue" : feature.color === "neon-green" ? "text-neon-green" : feature.color === "neon-purple" ? "text-neon-purple" : feature.color === "neon-pink" ? "text-neon-pink" : "text-neon-yellow"}`}>
+                <div className={`text-3xl sm:text-4xl mb-3 sm:mb-4 ${feature.color === "neon-blue" ? "text-neon-blue" : feature.color === "neon-green" ? "text-neon-green" : feature.color === "neon-purple" ? "text-neon-purple" : feature.color === "neon-pink" ? "text-neon-pink" : "text-neon-yellow"}`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{feature.title}</h3>
+                <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -224,16 +224,16 @@ function ImpactSection() {
 
   return (
     <section id="impact" className="scroll-mt-20 py-24 bg-background-secondary">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: "true", amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Proven Impact</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Proven Impact</h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Real results from cities already using SmartCity AI technology
           </p>
         </motion.div>
@@ -266,229 +266,31 @@ function ImpactSection() {
 
 // Pricing Section Component
 function PricingSection() {
-  return (
-    <section id="pricing" className="scroll-mt-20 py-24 bg-background-secondary relative overflow-hidden">
-      {/* Corner fade effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 pointer-events-none"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-neon-blue/10 to-transparent pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-neon-purple/10 to-transparent pointer-events-none"></div>
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: "true", amount: 0.2 }}
-          className="text-center mb-8"
-        >
-          <h2 className="font-heading font-semibold text-4xl md:text-5xl uppercase tracking-widest mb-4"
-              style={{ textShadow: '0 0 20px rgba(0, 217, 255, 0.3)' }}>
-            <span className="text-neon-blue">PRICING</span> PLANS
-          </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Choose the perfect plan for your smart city infrastructure
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Free Plan */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: "true" }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)] min-h-[500px] flex flex-col justify-between"
-          >
-            <div className="flex flex-col h-full">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Free</h3>
-                <div className="text-4xl font-bold text-neon-blue mb-4">$0<span className="text-lg text-gray-400">/mo</span></div>
-              </div>
-              <ul className="space-y-3 mb-8 text-left flex-grow">
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  1 City Node
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  Basic Analytics
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  24h Data History
-                </li>
-              </ul>
-              <motion.button 
-                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-neon-blue to-neon-cyan text-white font-semibold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.7)] transform hover:scale-105 border-2 border-white/20"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started
-              </motion.button>
-            </div>
-          </motion.div>
-
-          {/* Basic Plan */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: "true" }}
-            whileHover={{ scale: 1.08, y: -15 }}
-            className="glass rounded-2xl border-2 border-neon-blue/50 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_50px_rgba(0,217,255,0.6)] relative min-h-[520px] flex flex-col justify-between transform lg:scale-105 lg:origin-center"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/5 to-transparent rounded-2xl pointer-events-none"></div>
-            <div className="flex flex-col h-full relative z-10">
-              <div className="text-center mb-8">
-                <h3 className="text-3xl font-bold text-white mb-4 tracking-wide">Basic</h3>
-                <div className="relative inline-block">
-                  <div className="text-5xl font-bold text-neon-green mb-2 relative z-10">$49<span className="text-lg text-gray-400">/mo</span></div>
-                  <div className="absolute inset-0 bg-neon-green/20 blur-xl -z-10"></div>
-                </div>
-              </div>
-              <ul className="space-y-4 mb-8 text-left flex-grow">
-                <li className="flex items-center text-gray-200 text-lg">
-                  <span className="text-neon-green mr-3 text-xl">✓</span>
-                  <span className="font-medium">5 City Nodes</span>
-                </li>
-                <li className="flex items-center text-gray-200 text-lg">
-                  <span className="text-neon-green mr-3 text-xl">✓</span>
-                  <span className="font-medium">Real-time AI Insights</span>
-                </li>
-                <li className="flex items-center text-gray-200 text-lg">
-                  <span className="text-neon-green mr-3 text-xl">✓</span>
-                  <span className="font-medium">30-day History</span>
-                </li>
-                <li className="flex items-center text-gray-200 text-lg">
-                  <span className="text-neon-green mr-3 text-xl">✓</span>
-                  <span className="font-medium">Email Support</span>
-                </li>
-              </ul>
-              <motion.button 
-                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-neon-blue to-neon-cyan text-white font-semibold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.7)] transform hover:scale-105 border-2 border-white/20"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started
-              </motion.button>
-            </div>
-          </motion.div>
-
-          {/* Premium Plan */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: "true" }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)] min-h-[500px] flex flex-col justify-between"
-          >
-            <div className="flex flex-col h-full">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">Premium</h3>
-                <div className="text-4xl font-bold text-neon-purple mb-4">$199<span className="text-lg text-gray-400">/mo</span></div>
-              </div>
-              <ul className="space-y-3 mb-8 text-left flex-grow">
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  Unlimited Nodes
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  Predictive Maintenance AI
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  Full API Access
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <span className="text-neon-green mr-2">✓</span>
-                  24/7 Priority Support
-                </li>
-              </ul>
-              <motion.button 
-                onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
-                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-neon-blue to-neon-cyan text-white font-semibold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.7)] transform hover:scale-105 border-2 border-white/20"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get Started
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+  return <Pricing />;
 }
 
 // Testimonials Section Component
 function TestimonialsSection() {
-  const testimonialsData = [
-    {
-      className:
-        "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-2xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
-      username: "Maria Rodriguez",
-      handle: "@mariatech",
-      content: "SmartCity AI has revolutionized our urban planning! The real-time analytics and predictive maintenance features have reduced our operational costs by 40%. Game changer! 🏙️",
-      date: "Jan 15, 2026",
-      verified: true,
-      likes: 284,
-      retweets: 67,
-      tweetUrl: "https://x.com",
-    },
-    {
-      className:
-        "[grid-area:stack] translate-x-2 sm:translate-x-4 translate-y-1 sm:translate-y-3 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-2xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/60 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-500 hover:grayscale-0 before:left-0 before:top-0",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=James",
-      username: "James Chen",
-      handle: "@jamescity",
-      content: "The 3D visualization and AI-powered insights are incredible. We can now monitor traffic patterns and optimize routes in real-time. Our citizens love the improved efficiency! 🚗",
-      date: "Jan 12, 2026",
-      verified: true,
-      likes: 156,
-      retweets: 34,
-      tweetUrl: "https://x.com",
-    },
-    {
-      className: "[grid-area:stack] translate-x-4 sm:translate-x-8 translate-y-2 sm:translate-y-6 hover:translate-y-2 sm:hover:translate-y-4",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha",
-      username: "Aisha Patel",
-      handle: "@aishasmart",
-      content: "From energy management to waste optimization, SmartCity AI does it all. The integration was seamless and the ROI was immediate. Best decision for our smart city initiative! ⚡",
-      date: "Jan 10, 2026",
-      verified: true,
-      likes: 342,
-      retweets: 89,
-      tweetUrl: "https://x.com",
-    },
-  ];
-
   return (
-    <section id="testimonials" className="scroll-mt-20 py-24 bg-background-primary">
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section id="testimonials" className="scroll-mt-20 pt-16 sm:pt-20 pb-20 sm:pb-24 bg-background-primary">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: "true", amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">What City Leaders Say</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Hear from urban planners and city managers who are transforming their communities with SmartCity AI
-          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          viewport={{ once: "true", amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="flex justify-center items-center min-h-[600px] mt-4"
         >
-          <StaggerTestimonials />
+          <Testimonials />
         </motion.div>
       </div>
     </section>
@@ -549,7 +351,7 @@ function ContactSection() {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: "true", amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
       className="text-center mb-8"
     >
       <motion.h2
@@ -571,7 +373,7 @@ function ContactSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: "true" }}
+            viewport={{ once: true }}
             className="glass rounded-2xl border border-white/10 p-8 backdrop-blur-md"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -710,32 +512,44 @@ function TechnologySection() {
 
   return (
     <section id="technology" className="scroll-mt-20 py-24 bg-background-secondary">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: "true", amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Cutting-Edge Technology</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Cutting-Edge Technology</h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
             Built with latest technologies for maximum performance and reliability
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           {technologies.map((tech, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass rounded-2xl border border-white/10 p-8 hover:border-neon-blue/30 transition-all duration-300"
+              className="relative"
             >
-              <div className="text-4xl mb-4 text-neon-blue">{tech.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
-              <p className="text-gray-300 leading-relaxed">{tech.description}</p>
+              <div className="relative h-full rounded-2xl border border-white/10 p-4 sm:p-6 md:p-8 hover:border-neon-blue/30 transition-all duration-300">
+                <GlowingEffect
+                  spread={30}
+                  glow={true}
+                  disabled={false}
+                  proximity={60}
+                  inactiveZone={0.01}
+                  borderWidth={2}
+                />
+                <div className="relative z-10">
+                  <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-neon-blue">{tech.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{tech.title}</h3>
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{tech.description}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -744,102 +558,6 @@ function TechnologySection() {
   );
 }
 
-// Live Stats Component (responsive)
-function LiveStats() {
-  console.log('LiveStats component rendered');
-  const [stats, setStats] = useState({
-    traffic: 87.5,
-    energy: 92.3,
-    pollution: 78.9,
-    waste: 65.2
-  });
-
-  useEffect(() => {
-    console.log('LiveStats useEffect triggered');
-    const interval = setInterval(() => {
-      setStats(prev => ({
-        traffic: Math.max(0, Math.min(100, prev.traffic + (Math.random() - 0.5) * 1)),
-        energy: Math.max(0, Math.min(100, prev.energy + (Math.random() - 0.5) * 1)),
-        pollution: Math.max(0, Math.min(100, prev.pollution + (Math.random() - 0.5) * 1)),
-        waste: Math.max(0, Math.min(100, prev.waste + (Math.random() - 0.5) * 1))
-      }));
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="fixed left-0 top-20 h-full w-64 sm:w-80 lg:w-80 bg-black/80 backdrop-blur-md border-r border-white/10 p-4 sm:p-6 transform -translate-x-full transition-transform duration-300 z-40">
-      <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white">Live City Stats</h3>
-        <button
-          onClick={() => window.dispatchEvent(new CustomEvent('toggleStats'))}
-          className="text-gray-400 hover:text-white transition-colors"
-          title="Close stats"
-        >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-      
-      {/* Responsive grid layout */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-        <div className="glass rounded-lg p-3 sm:p-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs sm:text-sm text-gray-300">Traffic Flow</span>
-            <span className="text-sm sm:text-base lg:text-lg font-bold text-neon-blue">{stats.traffic.toFixed(1)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
-            <div 
-              className="bg-neon-blue h-1.5 sm:h-2 rounded-full transition-all duration-300"
-              style={{ width: `${stats.traffic}%` }}
-            ></div>
-          </div>
-        </div>
-        
-        <div className="glass rounded-lg p-3 sm:p-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs sm:text-sm text-gray-300">Energy</span>
-            <span className="text-sm sm:text-base lg:text-lg font-bold text-neon-green">{stats.energy.toFixed(1)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
-            <div 
-              className="bg-neon-green h-1.5 sm:h-2 rounded-full transition-all duration-300"
-              style={{ width: `${stats.energy}%` }}
-            ></div>
-          </div>
-        </div>
-        
-        <div className="glass rounded-lg p-3 sm:p-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs sm:text-sm text-gray-300">Air Quality</span>
-            <span className="text-sm sm:text-base lg:text-lg font-bold text-neon-purple">{stats.pollution.toFixed(1)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
-            <div 
-              className="bg-neon-purple h-1.5 sm:h-2 rounded-full transition-all duration-300"
-              style={{ width: `${stats.pollution}%` }}
-            ></div>
-          </div>
-        </div>
-        
-        <div className="glass rounded-lg p-3 sm:p-4">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs sm:text-sm text-gray-300">Waste Mgmt</span>
-            <span className="text-sm sm:text-base lg:text-lg font-bold text-neon-pink">{stats.waste.toFixed(1)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5 sm:h-2">
-            <div 
-              className="bg-neon-pink h-1.5 sm:h-2 rounded-full transition-all duration-300"
-              style={{ width: `${stats.waste}%` }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -867,15 +585,8 @@ export default function HomePage() {
     };
   }, []);
 
-  const handleScheduleDemo = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleDashboardClick = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  };
-
+  
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
@@ -894,7 +605,7 @@ export default function HomePage() {
       {/* Back to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 z-50 p-4 bg-neon-blue text-black rounded-full shadow-lg transition-all duration-300 hover:bg-neon-cyan hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] ${
+        className={`fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-50 p-3 sm:p-4 bg-neon-blue text-black rounded-full shadow-lg transition-all duration-300 hover:bg-neon-cyan hover:shadow-[0_0_20px_rgba(0,217,255,0.5)] ${
           showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
         whileHover={{ scale: 1.1 }}

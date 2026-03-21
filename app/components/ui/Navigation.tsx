@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
 import { useSmoothScroll, SmoothScrollLink } from "./SmoothScroll";
 import FullscreenGlobeModal from "./fullscreen-globe-modal";
 import FullscreenAnalyticsModal from "./fullscreen-analytics-modal";
@@ -35,8 +34,7 @@ const navigationItems: NavItem[] = [
     dropdown: [
       { id: "globe", label: "3D Globe", href: "#globe" },
       { id: "analytics", label: "Analytics", href: "#analytics" },
-      { id: "metrics", label: "Impact Metrics", href: "#metrics" },
-      { id: "testimonials", label: "Testimonials", href: "#testimonials" }
+      { id: "metrics", label: "Impact Metrics", href: "#metrics" }
     ]
   },
   {
@@ -46,22 +44,16 @@ const navigationItems: NavItem[] = [
     icon: "🚀"
   },
   {
-    id: "solutions",
-    label: "Solutions",
-    href: "#solutions",
-    icon: "💡",
-    dropdown: [
-      { id: "traffic", label: "Traffic Management", href: "#traffic" },
-      { id: "pollution", label: "Environmental", href: "#pollution" },
-      { id: "waste", label: "Waste Management", href: "#waste" },
-      { id: "energy", label: "Energy", href: "#energy" }
-    ]
-  },
-  {
     id: "pricing",
     label: "Pricing",
     href: "#pricing",
-    icon: "💰"
+    icon: "💎"
+  },
+  {
+    id: "testimonials",
+    label: "Testimonials",
+    href: "#testimonials",
+    icon: "💬"
   },
   {
     id: "contact",
@@ -464,10 +456,8 @@ export function Navigation({
 // Breadcrumb navigation
 export function BreadcrumbNavigation({
   items,
-  className = "",
 }: {
   items: { label: string; href?: string }[];
-  className?: string;
 }) {
   return (
     <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm">
@@ -495,11 +485,7 @@ export function BreadcrumbNavigation({
 }
 
 // Footer component
-export function Footer({
-  className = "",
-}: {
-  className?: string;
-}) {
+export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = {

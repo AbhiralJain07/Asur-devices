@@ -57,7 +57,7 @@ const config: Config = {
   },
   plugins: [
     // Add plugin for custom classes
-    function({ addUtilities, theme }: any) {
+    function({ addUtilities }: any) {
       const newUtilities = {
         '.glass': {
           background: 'rgba(255, 255, 255, 0.05)',

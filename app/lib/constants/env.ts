@@ -1,26 +1,26 @@
 // Environment configuration utilities
 export const env = {
   // Performance settings
-  PERFORMANCE_MONITORING: process.env.NEXT_PUBLIC_PERFORMANCE_MONITORING === "true",
-  TARGET_FPS: parseInt(process.env.NEXT_PUBLIC_TARGET_FPS || "60"),
-  HARDWARE_BASELINE: process.env.NEXT_PUBLIC_HARDWARE_BASELINE || "gtx1660",
+  PERFORMANCE_MONITORING: process.env['NEXT_PUBLIC_PERFORMANCE_MONITORING'] === "true",
+  TARGET_FPS: parseInt(process.env['NEXT_PUBLIC_TARGET_FPS'] || "60"),
+  HARDWARE_BASELINE: process.env['NEXT_PUBLIC_HARDWARE_BASELINE'] || "gtx1660",
   
   // Feature flags
-  ENABLE_3D_VISUALIZATIONS: process.env.NEXT_PUBLIC_ENABLE_3D_VISUALIZATIONS === "true",
-  ENABLE_ANIMATIONS: process.env.NEXT_PUBLIC_ENABLE_ANIMATIONS === "true",
-  ENABLE_PERFORMANCE_OPTIMIZATIONS: process.env.NEXT_PUBLIC_ENABLE_PERFORMANCE_OPTIMIZATIONS === "true",
+  ENABLE_3D_VISUALIZATIONS: process.env['NEXT_PUBLIC_ENABLE_3D_VISUALIZATIONS'] === "true",
+  ENABLE_ANIMATIONS: process.env['NEXT_PUBLIC_ENABLE_ANIMATIONS'] === "true",
+  ENABLE_PERFORMANCE_OPTIMIZATIONS: process.env['NEXT_PUBLIC_ENABLE_PERFORMANCE_OPTIMIZATIONS'] === "true",
   
   // API endpoints
-  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  WS_URL: process.env.NEXT_PUBLIC_WS_URL,
+  API_BASE_URL: process.env['NEXT_PUBLIC_API_BASE_URL'],
+  WS_URL: process.env['NEXT_PUBLIC_WS_URL'],
   
   // Analytics
-  ANALYTICS_ID: process.env.NEXT_PUBLIC_ANALYTICS_ID,
-  SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  ANALYTICS_ID: process.env['NEXT_PUBLIC_ANALYTICS_ID'],
+  SENTRY_DSN: process.env['NEXT_PUBLIC_SENTRY_DSN'],
   
   // Development
-  DEBUG_MODE: process.env.NEXT_PUBLIC_DEBUG_MODE === "true",
-  SHOW_PERFORMANCE_OVERLAY: process.env.NEXT_PUBLIC_SHOW_PERFORMANCE_OVERLAY === "true",
+  DEBUG_MODE: process.env['NEXT_PUBLIC_DEBUG_MODE'] === "true",
+  SHOW_PERFORMANCE_OVERLAY: process.env['NEXT_PUBLIC_SHOW_PERFORMANCE_OVERLAY'] === "true",
   
   // Build mode
   NODE_ENV: process.env.NODE_ENV,

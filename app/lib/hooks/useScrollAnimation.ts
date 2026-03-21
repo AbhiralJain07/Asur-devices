@@ -1,6 +1,6 @@
 "use client";
 
-import { useScroll, useTransform, useSpring, motion } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 
 export function useScrollAnimation() {
   const { scrollYProgress } = useScroll();

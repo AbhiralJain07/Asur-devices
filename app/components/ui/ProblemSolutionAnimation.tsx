@@ -71,6 +71,7 @@ export function ProblemReveal({
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [currentStep, isActive, isInView, isRevealed, onRevealComplete]);
 
   useEffect(() => {
@@ -282,6 +283,7 @@ export function SolutionAnimation({
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [currentPhase, isActive, isInView, isComplete, onAnimationComplete]);
 
   useEffect(() => {
@@ -455,10 +457,8 @@ export function ProblemSolutionAnimation({
   className?: string;
 }) {
   const [showSolution, setShowSolution] = useState(false);
-  const [problemRevealed, setProblemRevealed] = useState(false);
 
   const handleProblemRevealComplete = () => {
-    setProblemRevealed(true);
     setTimeout(() => setShowSolution(true), 500);
   };
 

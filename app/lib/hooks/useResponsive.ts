@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useWindowSize, WindowSize } from "./useWindowSize";
+import { useWindowSize } from "./useWindowSize";
 
 export interface Breakpoint {
   name: string;
@@ -22,7 +22,7 @@ export function useResponsive() {
     
     for (let i = BREAKPOINTS.length - 1; i >= 0; i--) {
       const breakpoint = BREAKPOINTS[i];
-      if (width >= breakpoint.minWidth && (!breakpoint.maxWidth || width <= breakpoint.maxWidth)) {
+      if (breakpoint && width >= breakpoint.minWidth && (!breakpoint.maxWidth || width <= breakpoint.maxWidth)) {
         return breakpoint.name;
       }
     }
@@ -51,8 +51,8 @@ export function getResponsiveValue<T>(values: Partial<Record<"mobile" | "tablet"
   
   for (let i = currentIndex; i >= 0; i--) {
     const bp = breakpointOrder[i];
-    if (values[bp] !== undefined) {
-      return values[bp];
+    if (bp && values[bp as keyof typeof values] !== undefined) {
+      return values[bp as keyof typeof values];
     }
   }
   

@@ -7,12 +7,9 @@ import { CityDataGenerator } from "../../lib/utils/cityGenerator";
 import Button from "../ui/Button";
 import { ScrollAnimation } from "../ui";
 
-// Lazy load the globe components
+// Lazy load the globe component
 const GlobeVisualization = lazy(() => 
   import("../../../components/globe/GlobeVisualization")
-);
-const CityMarkers = lazy(() => 
-  import("../../../components/globe/CityMarkers")
 );
 
 interface GlobeSectionProps {
@@ -262,7 +259,6 @@ export default function GlobeSection({
   const [cities, setCities] = useState<CityLocation[]>([]);
   const [globeState, setGlobeState] = useState<GlobeState | null>(null);
   const [selectedCity, setSelectedCity] = useState<CityLocation | null>(null);
-  const [hoveredCity, setHoveredCity] = useState<CityLocation | null>(null);
   const [isRotating, setIsRotating] = useState(autoRotate);
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [zoom, setZoom] = useState(1);
@@ -287,10 +283,6 @@ export default function GlobeSection({
 
   const handleCityClick = (city: CityLocation) => {
     setSelectedCity(city);
-  };
-
-  const handleCityHover = (city: CityLocation | null) => {
-    setHoveredCity(city);
   };
 
   const handleToggleRotation = () => {
@@ -383,21 +375,8 @@ export default function GlobeSection({
                   const city = cities.find(c => c.id === cityId);
                   if (city) handleCityClick(city);
                 }}
-                onCityHover={(cityId) => {
-                  const city = cityId ? cities.find(c => c.id === cityId) : null;
-                  handleCityHover(city || null);
-                }}
                 autoRotate={isRotating}
                 zoom={zoom}
-              />
-              
-              <CityMarkers
-                cities={cities}
-                markers={globeState.markers}
-                onCityClick={handleCityClick}
-                onCityHover={handleCityHover}
-                selectedCity={selectedCity}
-                hoveredCity={hoveredCity}
               />
             </Suspense>
 

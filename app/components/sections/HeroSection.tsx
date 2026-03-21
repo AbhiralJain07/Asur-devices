@@ -50,7 +50,6 @@ export default function HeroSection({
   scrollIndicator = true,
 }: HeroSectionProps) {
   const [cityData, setCityData] = useState<SmartCityData | null>(null);
-  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
   const [, setIsMouseMoving] = useState(false);
 
   useEffect(() => {
@@ -84,10 +83,7 @@ export default function HeroSection({
     };
   }, []);
 
-  const handleDistrictClick = (districtId: string) => {
-    setSelectedDistrict(districtId);
-  };
-
+  
   const handleDemoClick = () => {
     // Emit custom event for modal
     window.dispatchEvent(new CustomEvent('openDemoModal'));
@@ -105,13 +101,7 @@ export default function HeroSection({
     }
   };
 
-  const handleLearnMoreKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      document.getElementById("features")?.scrollIntoView();
-    }
-  };
-
+  
   if (!cityData) {
     return (
       <div className="min-h-screen bg-background-primary flex items-center justify-center">
@@ -237,22 +227,7 @@ export default function HeroSection({
                   </div>
                 </ScrollAnimation>
 
-                {/* Selected district info */}
-                {selectedDistrict && (
-                  <motion.div
-                    className="p-4 glass rounded-lg relative z-30"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    <p className="text-sm text-neon-blue">
-                      Selected: {selectedDistrict}
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      Click on buildings to explore district data
-                    </p>
-                  </motion.div>
-                )}
-              </div>
+                              </div>
             </ScrollAnimation>
           </div>
 

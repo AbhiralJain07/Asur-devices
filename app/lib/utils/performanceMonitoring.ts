@@ -40,7 +40,7 @@ export class PerformanceMonitoringService {
     
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
-      this.monitoringInterval = undefined;
+      this.monitoringInterval = null as any;
     }
   }
 
@@ -49,8 +49,11 @@ export class PerformanceMonitoringService {
       type: "fps_update", // Default type, can be overridden
       timestamp: new Date(),
       metrics: { fps: value },
-      context,
     };
+    
+    if (context) {
+      event.context = context;
+    }
 
     // Determine event type based on metric name
     if (name.includes("fps")) {
@@ -98,7 +101,8 @@ export class PerformanceMonitoringService {
     const memoryEvents = this.events.filter(e => e.type === "memory_warning");
     if (memoryEvents.length === 0) return 0;
     
-    return memoryEvents[memoryEvents.length - 1].metrics.memoryUsage || 0;
+    const lastEvent = memoryEvents[memoryEvents.length - 1];
+    return lastEvent?.metrics.memoryUsage || 0;
   }
 
   clearEvents(): void {

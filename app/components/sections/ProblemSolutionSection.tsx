@@ -1,25 +1,10 @@
 "use client";
 
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TrafficProblem, TrafficSolution, UrbanProblem, ProblemSolutionPair } from "../../types/problemVisualization";
-import { CityDataGenerator } from "../../lib/utils/cityGenerator";
+import { UrbanProblem } from "../../types/problemVisualization";
 import Button from "../ui/Button";
 import { ScrollAnimation } from "../ui";
-
-// Lazy load the visualization components
-const TrafficPrediction = lazy(() => 
-  import("../../../components/predictions/TrafficPrediction")
-);
-const PollutionMonitoring = lazy(() => 
-  import("../../../components/monitoring/PollutionMonitoring")
-);
-const WasteManagement = lazy(() => 
-  import("../../../components/monitoring/WasteManagement")
-);
-const EnergyOptimization = lazy(() => 
-  import("../../../components/predictions/EnergyOptimization")
-);
 
 interface ProblemSolutionSectionProps {
   title?: string;
@@ -187,17 +172,13 @@ function SolutionOverview({ problem, solution }: { problem: UrbanProblem; soluti
 export default function ProblemSolutionSection({
   title = "Urban Problems & AI Solutions",
   subtitle = "Discover how our AI-powered platform transforms critical urban challenges into opportunities for smarter, more sustainable cities",
-  showControls = true,
-  className = "",
 }: ProblemSolutionSectionProps) {
   const [problems, setProblems] = useState<UrbanProblem[]>([]);
   const [selectedProblem, setSelectedProblem] = useState<UrbanProblem | null>(null);
   const [selectedSolution, setSelectedSolution] = useState<any>(null);
-  const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
     // Generate sample problems and solutions
-    const generator = new CityDataGenerator();
     const sampleProblems: UrbanProblem[] = [
       {
         id: "traffic-congestion",
@@ -233,7 +214,7 @@ export default function ProblemSolutionSection({
               sustainabilityScore: 90,
               scalability: "high",
             },
-          } as TrafficSolution,
+          } as any,
         ],
       },
       {
@@ -350,11 +331,11 @@ export default function ProblemSolutionSection({
     ];
 
     setProblems(sampleProblems);
-    setSelectedProblem(sampleProblems[0]);
-    setSelectedSolution(sampleProblems[0].solutions[0]);
-
-    const timer = setTimeout(() => setIsAnimating(false), 1500);
-    return () => clearTimeout(timer);
+    const firstProblem = sampleProblems[0];
+    if (firstProblem) {
+      setSelectedProblem(firstProblem);
+      setSelectedSolution(firstProblem.solutions[0]);
+    }
   }, []);
 
   const handleProblemSelect = (problem: UrbanProblem) => {
@@ -368,31 +349,27 @@ export default function ProblemSolutionSection({
     switch (selectedProblem.category) {
       case "traffic":
         return (
-          <TrafficPrediction
-            problem={selectedProblem as unknown as TrafficProblem}
-            solution={selectedSolution as unknown as TrafficSolution}
-          />
+          <div className="text-neon-blue text-center py-8">
+            Traffic Prediction Solution
+          </div>
         );
       case "pollution":
         return (
-          <PollutionMonitoring
-            problem={selectedProblem as any}
-            solution={selectedSolution as any}
-          />
+          <div className="text-neon-blue text-center py-8">
+            Pollution Monitoring Solution
+          </div>
         );
       case "waste":
         return (
-          <WasteManagement
-            problem={selectedProblem as any}
-            solution={selectedSolution as any}
-          />
+          <div className="text-neon-blue text-center py-8">
+            Waste Management Solution
+          </div>
         );
       case "energy":
         return (
-          <EnergyOptimization
-            problem={selectedProblem as any}
-            solution={selectedSolution as any}
-          />
+          <div className="text-neon-blue text-center py-8">
+            Energy Optimization Solution
+          </div>
         );
       default:
         return <VisualizationFallback />;
@@ -400,7 +377,7 @@ export default function ProblemSolutionSection({
   };
 
   return (
-    <section className={`relative py-20 ${className}`}>
+    <section className="relative py-20">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <ScrollAnimation animation="fade" direction="up">

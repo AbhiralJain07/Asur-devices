@@ -35,7 +35,7 @@ export default function Card({
   return (
     <motion.div
       className={classes}
-      whileHover={hover ? { y: -4, boxShadow: "0 20px 40px rgba(0, 217, 255, 0.3)" } : undefined}
+      whileHover={hover ? { y: -4, boxShadow: "0 20px 40px rgba(0, 217, 255, 0.3)" } : {}}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {children}

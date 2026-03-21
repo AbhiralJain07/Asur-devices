@@ -139,14 +139,14 @@ export class CityDataGenerator {
     return cities.filter(city => city.status === "active");
   }
 
-  getCitiesByRegion(cities: CityLocation[]): Record<string, CityLocation[]> {
-    const regions: Record<string, CityLocation[]> = {
-      northAmerica: [],
-      europe: [],
-      asia: [],
-      southAmerica: [],
-      africa: [],
-      oceania: [],
+  getCitiesByRegion(cities: CityLocation[]): { northAmerica: CityLocation[]; europe: CityLocation[]; asia: CityLocation[]; southAmerica: CityLocation[]; africa: CityLocation[]; oceania: CityLocation[] } {
+    const regions = {
+      northAmerica: [] as CityLocation[],
+      europe: [] as CityLocation[],
+      asia: [] as CityLocation[],
+      southAmerica: [] as CityLocation[],
+      africa: [] as CityLocation[],
+      oceania: [] as CityLocation[],
     };
     
     cities.forEach(city => {

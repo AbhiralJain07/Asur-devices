@@ -29,7 +29,7 @@ function Globe({ rotationSpeed, isRotating }: {
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
   
-  useFrame((state) => {
+  useFrame(() => {
     if (meshRef.current && isRotating) {
       meshRef.current.rotation.y += rotationSpeed;
     }
@@ -124,6 +124,28 @@ function Atmosphere() {
       />
     </mesh>
   );
+}
+
+// City marker component with callbacks
+function CityMarkerWithCallbacks({ 
+  marker, 
+  onClick, 
+  onHover 
+}: { 
+  marker: CityMarker; 
+  onClick: (cityId: string) => void; 
+  onHover: (cityId: string | null) => void; 
+}) {
+  return <CityMarker marker={marker} onClick={onClick} onHover={onHover} />;
+}
+
+// City marker component without callbacks
+function CityMarkerWithoutCallbacks({ 
+  marker 
+}: { 
+  marker: CityMarker; 
+}) {
+  return <CityMarker marker={marker} />;
 }
 
 // City marker component
@@ -264,14 +286,24 @@ export default function GlobeVisualization({
         <Globe rotationSpeed={rotationSpeed} isRotating={globeState.isRotating} />
         <GlobeGrid />
         
-        {globeState.markers.map((marker) => (
-          <CityMarker
-            key={marker.cityId}
-            marker={marker}
-            onClick={onCityClick}
-            onHover={onCityHover}
-          />
-        ))}
+        {globeState.markers.map((marker) => {
+          if (onCityClick && onCityHover) {
+            return (
+              <CityMarkerWithCallbacks
+                key={marker.cityId}
+                marker={marker}
+                onClick={onCityClick}
+                onHover={onCityHover}
+              />
+            );
+          }
+          return (
+            <CityMarkerWithoutCallbacks
+              key={marker.cityId}
+              marker={marker}
+            />
+          );
+        })}
       </Canvas>
       
       {/* Performance overlay for development */}

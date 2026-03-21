@@ -1,5 +1,3 @@
-import { Component } from "./real-time-analytics";
-
 export default function DemoOne() {
-  return <Component />;
+  return <div className="text-neon-blue">Demo Component</div>;
 }

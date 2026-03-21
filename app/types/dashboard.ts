@@ -38,16 +38,16 @@ export type MetricType =
 
 export interface DashboardMetrics {
   timestamp: Date;
-  traffic: TrafficMetrics;
-  pollution: PollutionMetrics;
-  waste: WasteMetrics;
-  energy: EnergyMetrics;
+  traffic: DashboardTrafficMetrics;
+  pollution: DashboardPollutionMetrics;
+  waste: DashboardWasteMetrics;
+  energy: DashboardEnergyMetrics;
   publicSafety: PublicSafetyMetrics;
   infrastructure: InfrastructureMetrics;
   citizenSatisfaction: CitizenSatisfactionMetrics;
 }
 
-export interface TrafficMetrics {
+export interface DashboardTrafficMetrics {
   averageSpeed: number;
   congestionLevel: number;
   incidentCount: number;
@@ -57,7 +57,7 @@ export interface TrafficMetrics {
   parkingUtilization: number;
 }
 
-export interface PollutionMetrics {
+export interface DashboardPollutionMetrics {
   airQualityIndex: number;
   particulateMatter25: number;
   particulateMatter10: number;
@@ -68,7 +68,7 @@ export interface PollutionMetrics {
   noiseLevel: number;
 }
 
-export interface WasteMetrics {
+export interface DashboardWasteMetrics {
   collectionEfficiency: number;
   recyclingRate: number;
   landfillUsage: number;
@@ -78,7 +78,7 @@ export interface WasteMetrics {
   routeOptimization: number;
 }
 
-export interface EnergyMetrics {
+export interface DashboardEnergyMetrics {
   consumption: number;
   efficiency: number;
   renewablePercentage: number;
@@ -156,11 +156,11 @@ export interface DashboardAlert {
   timestamp: Date;
   source: string;
   isRead: boolean;
-  actions?: AlertAction[];
+  actions?: DashboardAlertAction[];
   metadata?: Record<string, any>;
 }
 
-export interface AlertAction {
+export interface DashboardAlertAction {
   id: string;
   label: string;
   action: () => void;
@@ -247,12 +247,12 @@ export interface DashboardActionPayload {
 
 // Utility types
 export type MetricValue = number | string | boolean;
-export type MetricUnit = "%" | "km/h" | "AQI" | "MW" | "tons" | "minutes" | "hours" | "days" | "$" | "count";
+export type DashboardMetricUnit = "%" | "km/h" | "AQI" | "MW" | "tons" | "minutes" | "hours" | "days" | "$" | "count";
 
 export interface MetricDefinition {
   key: keyof DashboardMetrics;
   label: string;
-  unit: MetricUnit;
+  unit: DashboardMetricUnit;
   type: "gauge" | "trend" | "counter" | "chart";
   category: MetricType;
   icon: string;

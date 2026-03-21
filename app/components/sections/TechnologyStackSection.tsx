@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollAnimation } from "../ui";
-import AccessibilityVisualization from "../ui/AccessibilityVisualization";
-import ResponsiveVisualization from "../ui/ResponsiveVisualization";
 
 // Technology stack data
 const techStack = {
@@ -414,16 +412,13 @@ function ArchitectureDiagram() {
 export default function TechnologyStackSection({
   title = "Powered by Modern Technology",
   subtitle = "Built with cutting-edge technologies for optimal performance and scalability",
-  className = "",
 }: {
   title?: string;
   subtitle?: string;
-  className?: string;
 }) {
   return (
-    <AccessibilityVisualization className={className}>
-      <section className="relative py-20">
-        <div className="container mx-auto px-6">
+    <section className="relative py-20">
+      <div className="container mx-auto px-6">
           {/* Section Header */}
           <ScrollAnimation animation="fade" direction="up">
             <div className="text-center mb-16">
@@ -525,6 +520,5 @@ export default function TechnologyStackSection({
           </div>
         </ScrollAnimation>
       </section>
-    </AccessibilityVisualization>
   );
 }

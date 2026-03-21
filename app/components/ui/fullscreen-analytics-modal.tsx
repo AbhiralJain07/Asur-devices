@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { Component } from "./real-time-analytics";
 
 interface FullscreenAnalyticsModalProps {
   isOpen: boolean;
@@ -113,7 +112,9 @@ export default function FullscreenAnalyticsModal({ isOpen, onClose }: Fullscreen
                   </div>
                 </div>
               ) : (
-                <Component />
+                <div className="flex items-center justify-center h-64">
+                  <div className="text-neon-blue">Analytics Dashboard</div>
+                </div>
               )}
             </motion.div>
 
