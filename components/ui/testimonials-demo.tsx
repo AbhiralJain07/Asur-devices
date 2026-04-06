@@ -1,7 +1,10 @@
-import { TestimonialsColumn, type Testimonial } from "@/components/ui/testimonials-columns-1";
+﻿"use client";
+
 import { motion } from "motion/react";
 
-const testimonials: Testimonial[] = [
+import { TestimonialsColumn, type Testimonial } from "@/components/ui/testimonials-columns-1";
+
+const fallbackTestimonials: Testimonial[] = [
   {
     text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
     image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face",
@@ -58,30 +61,46 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 9);
+function chunkTestimonials(testimonials: Testimonial[]): [Testimonial[], Testimonial[], Testimonial[]] {
+  const safeTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
+  const chunkSize = Math.max(1, Math.ceil(safeTestimonials.length / 3));
+  const firstColumn = safeTestimonials.slice(0, chunkSize);
+  const secondColumn = safeTestimonials.slice(chunkSize, chunkSize * 2);
+  const thirdColumn = safeTestimonials.slice(chunkSize * 2);
 
-const Testimonials = () => {
+  return [
+    firstColumn.length > 0 ? firstColumn : safeTestimonials.slice(0, 1),
+    secondColumn.length > 0 ? secondColumn : safeTestimonials.slice(0, 1),
+    thirdColumn.length > 0 ? thirdColumn : safeTestimonials.slice(0, 1),
+  ];
+}
+
+interface TestimonialsProps {
+  testimonials?: Testimonial[];
+}
+
+const Testimonials = ({ testimonials = fallbackTestimonials }: TestimonialsProps) => {
+  const [firstColumn, secondColumn, thirdColumn] = chunkTestimonials(testimonials);
+
   return (
-    <section className="bg-background relative">
+    <section className="relative bg-background">
       <div className="container z-10 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true }}
-          className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
+          className="mx-auto flex max-w-[540px] flex-col items-center justify-center"
         >
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tighter mt-5">
+          <h2 className="mt-5 text-lg font-bold tracking-tighter sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
             What our users say
           </h2>
-          <p className="text-center mt-5 opacity-75">
-            See what our customers have to say about us.
+          <p className="mt-5 text-center opacity-75">
+            Real feedback from the teams operating smarter, faster cities.
           </p>
         </motion.div>
 
-        <div className="flex justify-center gap-4 sm:gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[600px] sm:max-h-[740px] overflow-hidden">
+        <div className="mt-10 flex max-h-[600px] justify-center gap-4 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] sm:max-h-[740px] sm:gap-6">
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
@@ -92,3 +111,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
