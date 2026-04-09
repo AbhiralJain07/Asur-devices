@@ -100,7 +100,7 @@ export default function AdminLoginForm() {
         </div>
       ) : null}
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
+      <Button type="submit" className="w-full border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] shadow-[0_0_28px_rgba(0,217,255,0.26)] hover:shadow-[0_0_38px_rgba(0,217,255,0.34)]" disabled={isSubmitting}>
         {isSubmitting ? 'Signing in...' : 'Sign in to dashboard'}
       </Button>
     </form>

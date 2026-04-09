@@ -115,7 +115,7 @@ export default function AdminQuickLoginPanel({ onClose }: AdminQuickLoginPanelPr
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-neon-blue inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold tracking-[0.2em] text-black uppercase transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="relative inline-flex flex-1 items-center justify-center rounded-2xl border border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] px-4 py-3 text-sm font-semibold tracking-[0.2em] text-black uppercase shadow-[0_0_28px_rgba(0,217,255,0.26)] transition-all duration-300 hover:brightness-[1.04] hover:saturate-110 hover:shadow-[0_0_38px_rgba(0,217,255,0.34)] hover:scale-[1.02] active:brightness-[0.96] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none disabled:hover:scale-100"
           >
             {isSubmitting ? 'Signing in...' : 'Login as Admin'}
           </button>
@@ -126,7 +126,7 @@ export default function AdminQuickLoginPanel({ onClose }: AdminQuickLoginPanelPr
               setPassword(DEFAULT_ADMIN_PASSWORD);
               setErrorMessage('');
             }}
-            className="rounded-2xl border border-white/10 px-4 py-3 text-sm font-medium text-white/75 transition hover:border-white/20 hover:text-white"
+            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white/75 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-[0.98]"
           >
             Reset
           </button>

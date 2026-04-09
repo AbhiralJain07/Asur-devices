@@ -61,15 +61,15 @@ function ActionChip({
 }) {
   const toneClasses =
     tone === 'accent'
-      ? 'border-neon-blue/30 bg-neon-blue/10 text-neon-blue hover:border-neon-blue/50 hover:bg-neon-blue/15 hover:text-white active:bg-neon-blue/20'
-      : 'border-white/10 bg-white/5 text-white/70 hover:border-white/20 hover:bg-white/10 hover:text-white active:bg-white/15';
+      ? 'border-cyan-200/40 bg-gradient-to-r from-neon-blue/20 to-cyan-400/20 text-neon-blue hover:border-cyan-200/60 hover:from-neon-blue/30 hover:to-cyan-400/30 hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.15)] active:from-neon-blue/25 active:to-cyan-400/25 active:scale-[0.98]'
+      : 'border-white/10 bg-white/5 text-white/70 hover:border-white/20 hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.08)] active:bg-white/15 active:scale-[0.98]'
 
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`focus-visible:ring-neon-blue/50 rounded-full border px-3 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-45 ${toneClasses}`}
+      className={`focus-visible:ring-neon-blue/50 rounded-full border px-3 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:scale-100 ${toneClasses}`}
     >
       {label}
     </button>
@@ -749,10 +749,10 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button variant="outline" onClick={() => router.push('/')}>
+            <Button variant="outline" className="border-white/20 bg-white/5 backdrop-blur-sm hover:border-white/30 hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.08)]" onClick={() => router.push('/')}>
               Visit landing page
             </Button>
-            <Button variant="primary" onClick={() => router.push('/blogs')}>
+            <Button variant="primary" className="border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] shadow-[0_0_28px_rgba(0,217,255,0.26)] hover:shadow-[0_0_38px_rgba(0,217,255,0.34)]" onClick={() => router.push('/blogs')}>
               View public blogs
             </Button>
           </div>
@@ -782,10 +782,10 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                 setActiveTab(tab.id);
                 setStatusFilter('all');
               }}
-              className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition ${
+              className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
                 activeTab === tab.id
-                  ? 'border-cyan-200/40 bg-[linear-gradient(135deg,#00d9ff,#72f4ff)] text-slate-950 shadow-[0_0_24px_rgba(0,217,255,0.22)] hover:brightness-[1.04]'
-                  : 'border-transparent bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  ? 'border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] text-slate-950 shadow-[0_0_24px_rgba(0,217,255,0.22)] hover:brightness-[1.04] hover:saturate-110 hover:shadow-[0_0_32px_rgba(0,217,255,0.30)] hover:scale-[1.02] active:brightness-[0.96] active:scale-[0.98]'
+                  : 'border-transparent bg-white/5 text-white/70 hover:bg-white/10 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.08)] hover:scale-[1.02] active:scale-[0.98]'
               }`}
             >
               <span>{tab.label}</span>
@@ -811,6 +811,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
             {showCreateButton ? (
               <Button
                 variant="primary"
+                className="border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] shadow-[0_0_28px_rgba(0,217,255,0.26)] hover:shadow-[0_0_38px_rgba(0,217,255,0.34)]"
                 onClick={() => {
                   if (activeTab === 'blogs') openBlogModal();
                   if (activeTab === 'testimonials') openTestimonialModal();
@@ -961,7 +962,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                   <button
                     type="button"
                     onClick={() => openBlogModal()}
-                    className="hover:border-neon-blue/30 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition hover:bg-white/10 hover:text-white active:bg-white/15"
+                    className="hover:border-cyan-200/40 hover:from-cyan-400/10 hover:to-neon-blue/10 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition-all duration-300 hover:bg-gradient-to-r hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.12)] active:scale-[0.98]"
                   >
                     <span>Create blog post</span>
                     <span className="text-[11px] tracking-[0.22em] text-white/35 uppercase">
@@ -971,7 +972,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                   <button
                     type="button"
                     onClick={() => openTestimonialModal()}
-                    className="hover:border-neon-blue/30 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition hover:bg-white/10 hover:text-white active:bg-white/15"
+                    className="hover:border-cyan-200/40 hover:from-cyan-400/10 hover:to-neon-blue/10 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition-all duration-300 hover:bg-gradient-to-r hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.12)] active:scale-[0.98]"
                   >
                     <span>Add testimonial</span>
                     <span className="text-[11px] tracking-[0.22em] text-white/35 uppercase">
@@ -981,7 +982,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                   <button
                     type="button"
                     onClick={() => openPricingModal()}
-                    className="hover:border-neon-blue/30 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition hover:bg-white/10 hover:text-white active:bg-white/15"
+                    className="hover:border-cyan-200/40 hover:from-cyan-400/10 hover:to-neon-blue/10 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition-all duration-300 hover:bg-gradient-to-r hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.12)] active:scale-[0.98]"
                   >
                     <span>Update pricing</span>
                     <span className="text-[11px] tracking-[0.22em] text-white/35 uppercase">
@@ -994,7 +995,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                       setActiveTab('contacts');
                       setStatusFilter('all');
                     }}
-                    className="hover:border-neon-blue/30 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition hover:bg-white/10 hover:text-white active:bg-white/15"
+                    className="hover:border-cyan-200/40 hover:from-cyan-400/10 hover:to-neon-blue/10 flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-left text-sm text-white/75 transition-all duration-300 hover:bg-gradient-to-r hover:text-white hover:shadow-[0_0_20px_rgba(0,217,255,0.12)] active:scale-[0.98]"
                   >
                     <span>Review inbox</span>
                     <span className="text-[11px] tracking-[0.22em] text-white/35 uppercase">
@@ -1050,7 +1051,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                             />
                             <button
                               type="button"
-                              className="hover:border-neon-blue/40 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition hover:bg-white/10 active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40"
+                              className="hover:border-cyan-200/60 hover:bg-gradient-to-br hover:from-cyan-400/20 hover:to-neon-blue/20 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.15)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                               onClick={() => openBlogModal(blog)}
                               disabled={
                                 isActionPending(statusActionKey) || isActionPending(deleteActionKey)
@@ -1060,7 +1061,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                             </button>
                             <button
                               type="button"
-                              className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition hover:border-red-500/40 hover:bg-red-500/15 hover:text-red-200 active:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-40"
+                              className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition-all duration-300 hover:border-red-500/40 hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-600/20 hover:text-red-200 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                               onClick={() =>
                                 void deleteItem(
                                   deleteActionKey,
@@ -1147,7 +1148,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                             />
                             <button
                               type="button"
-                              className="hover:border-neon-blue/40 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition hover:bg-white/10 active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40"
+                              className="hover:border-cyan-200/60 hover:bg-gradient-to-br hover:from-cyan-400/20 hover:to-neon-blue/20 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.15)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                               onClick={() => openTestimonialModal(testimonial)}
                               disabled={
                                 isActionPending(featureActionKey) ||
@@ -1159,7 +1160,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                             </button>
                             <button
                               type="button"
-                              className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition hover:border-red-500/40 hover:bg-red-500/15 hover:text-red-200 active:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-40"
+                              className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition-all duration-300 hover:border-red-500/40 hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-600/20 hover:text-red-200 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                               onClick={() =>
                                 void deleteItem(
                                   deleteActionKey,
@@ -1218,7 +1219,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                       <div className="flex gap-2">
                         <button
                           type="button"
-                          className="hover:border-neon-blue/40 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition hover:bg-white/10 active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="hover:border-cyan-200/60 hover:bg-gradient-to-br hover:from-cyan-400/20 hover:to-neon-blue/20 hover:text-neon-blue rounded-full border border-white/10 bg-white/5 p-2 text-white/70 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,217,255,0.15)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                           onClick={() => openPricingModal(plan)}
                           disabled={
                             isActionPending(statusActionKey) ||
@@ -1230,7 +1231,7 @@ export default function AdminDashboard({ adminEmail, initialStore }: AdminDashbo
                         </button>
                         <button
                           type="button"
-                          className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition hover:border-red-500/40 hover:bg-red-500/15 hover:text-red-200 active:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="rounded-full border border-red-500/20 bg-red-500/10 p-2 text-red-300 transition-all duration-300 hover:border-red-500/40 hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-600/20 hover:text-red-200 hover:shadow-[0_0_20px_rgba(239,68,68,0.25)] active:scale-[0.95] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
                           onClick={() =>
                             void deleteItem(
                               deleteActionKey,

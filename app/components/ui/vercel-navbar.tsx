@@ -232,7 +232,7 @@ export function VercelNavbar({ session }: { session: AdminSession | null }) {
           ) : (
             <div className="relative" ref={desktopAdminPanelRef}>
               <Button
-                className="border-neon-blue/60 ring-neon-blue/30 rounded-full border bg-[linear-gradient(135deg,#00d9ff,#7df9ff)] px-5 py-2.5 text-black shadow-[0_0_34px_rgba(0,217,255,0.34)] ring-1 hover:shadow-[0_0_44px_rgba(0,217,255,0.42)] hover:brightness-[1.03]"
+                className="border-neon-blue/60 ring-neon-blue/30 rounded-full border bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] px-5 py-2.5 text-black shadow-[0_0_34px_rgba(0,217,255,0.34)] ring-1 transition-all duration-300 hover:shadow-[0_0_44px_rgba(0,217,255,0.42)] hover:brightness-[1.04] hover:saturate-110 hover:scale-[1.02] active:brightness-[0.96] active:scale-[0.98]"
                 onClick={() => setAdminPanelOpen(current => !current)}
               >
                 <span className="inline-flex h-2.5 w-2.5 rounded-full bg-black/70" />
@@ -264,7 +264,7 @@ export function VercelNavbar({ session }: { session: AdminSession | null }) {
             <button
               type="button"
               onClick={() => setAdminPanelOpen(current => !current)}
-              className="border-neon-blue/50 ring-neon-blue/20 inline-flex items-center gap-2 rounded-xl border bg-[linear-gradient(135deg,#00d9ff,#7df9ff)] px-3.5 py-2.5 text-[11px] font-bold tracking-[0.24em] text-black uppercase shadow-[0_0_26px_rgba(0,217,255,0.28)] ring-1"
+              className="border-neon-blue/50 ring-neon-blue/20 inline-flex items-center gap-2 rounded-xl border bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] px-3.5 py-2.5 text-[11px] font-bold tracking-[0.24em] text-black uppercase shadow-[0_0_26px_rgba(0,217,255,0.28)] ring-1 transition-all duration-300 hover:shadow-[0_0_36px_rgba(0,217,255,0.36)] hover:brightness-[1.04] hover:saturate-110 hover:scale-[1.02] active:brightness-[0.96] active:scale-[0.98]"
             >
               <span className="h-2 w-2 rounded-full bg-black/70" />
               <Shield className="h-3.5 w-3.5" />
@@ -327,7 +327,7 @@ export function VercelNavbar({ session }: { session: AdminSession | null }) {
             ) : (
               <button
                 type="button"
-                className="bg-neon-blue mt-2 rounded-xl px-3 py-3 text-left text-sm font-semibold tracking-[0.2em] text-black uppercase"
+                className="mt-2 rounded-xl border border-cyan-200/40 bg-gradient-to-br from-[#00d9ff] via-[#00e5ff] to-[#7df9ff] px-3 py-3 text-left text-sm font-semibold tracking-[0.2em] text-black uppercase shadow-[0_0_24px_rgba(0,217,255,0.22)] transition-all duration-300 hover:brightness-[1.04] hover:saturate-110 hover:shadow-[0_0_32px_rgba(0,217,255,0.30)] hover:scale-[1.01] active:brightness-[0.96] active:scale-[0.99]"
                 onClick={() => {
                   setMobileOpen(false);
                   setAdminPanelOpen(true);
